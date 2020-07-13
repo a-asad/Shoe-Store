@@ -37,7 +37,7 @@ function TopAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.appbar}>
+      <AppBar position="fixed" className={classes.appbar}>
           <div className={classes.innerBar}>
           <Button><Link to='/' className={classes.link}>Home</Link></Button>
             <Button><Link to='products' className={classes.link}>Products</Link></Button>
