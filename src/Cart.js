@@ -38,11 +38,23 @@ export const Cart = ()=>{
         dispatch({type:'remove', item:itm});
     }
 
+    function itemCount()
+    {
+        let count=0;
+        for(let i in cart)
+        {
+        if(cart[i].quantity > 0)
+            count++;
+        }
+        return count;
+    }
+
     return(
         <div style={{marginTop:60, padding:20, minHeight:'80vh'}}>
             <Typography align='center' variant='h4' style={{marginBottom:'10vh'}}>Cart</Typography>
             <Grid container justify='center'  spacing={4} alignItems='center'>
-                {Object.entries(cart).map(([shoe,{image,price,quantity}])=>{
+                {itemCount() === 0? 'No items added yet!':
+                Object.entries(cart).map(([shoe,{image,price,quantity}])=>{
                     if(quantity > 0){
                         return(
                             <Grid item sm={10} md={8} xs={11} key={shoe}>
@@ -65,7 +77,6 @@ export const Cart = ()=>{
                                             </Grid>
                                         </Grid>
                                     </Paper>
-                                
                             </Grid>
                         )
                     }

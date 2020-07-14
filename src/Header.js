@@ -36,6 +36,17 @@ const useStyles = makeStyles((theme) => ({
 function TopAppBar() {
   const classes = useStyles();
   const {cart} = useContext(cartContext);
+
+  function itemCount()
+  {
+    let count=0;
+    for(let i in cart)
+    {
+        count+=cart[i].quantity;
+    }
+    return count;
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appbar}>
@@ -43,7 +54,7 @@ function TopAppBar() {
           <Button><Link to='/' className={classes.link}>Home</Link></Button>
             <Button><Link to='products' className={classes.link}>Products</Link></Button>
           </div>
-          <Link to='cart' className={classes.cart}><ShoppingCartIcon/>{Object.keys(cart).length}</Link>
+          <Link to='cart' className={classes.cart}><ShoppingCartIcon/>{itemCount()}</Link>
       </AppBar>
     </div>
   );
