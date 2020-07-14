@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Grid, Paper, Typography, Button, makeStyles } from '@material-ui/core';
-import { context } from './Context';
+import { context, cartContext } from './Context';
 
 const useStyles = makeStyles((theme) => ({
     cartBtn:{
@@ -17,9 +17,11 @@ const useStyles = makeStyles((theme) => ({
 export const Product = ()=>{
     const {item} = useParams()
     const classes = useStyles();
-    let {shoes, dispatch} = React.useContext(context);
+    let {shoes, dispatch} = useContext(context);
+    const {cartDispatch} = useContext(cartContext);
     function addToCart(itm)
     {
+        cartDispatch({type:'add', item:itm, shoe:shoes[itm]})
         dispatch({type:'remove', item:itm});
     }
     return(
