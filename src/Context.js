@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { shoesReducer } from './Reducer';
+import { shoesReducer, cartReducer } from './Reducer';
 let shoes = {
     "Nike Adapt Auto Max":{
         image:"https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/deefc295-9a24-446b-92c9-3a1249a81f37/adapt-auto-max-mens-shoe-PqhFLq.jpg",
@@ -42,12 +42,23 @@ let shoes = {
         quantity:20,
     }
 };
+let cart = {
+    "Nike AlphaDunk":{
+        image:"https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/rxw5wse2xkvfzyvilovy/alphadunk-basketball-shoe-PVlFH3.jpg",
+        price:100,
+        quantity:1,
+        }
+    };
 export const context = React.createContext(shoes);
+export const cartContext = React.createContext(cart);
 export const ShoesProvider = ({children})=>{
     let [shoe, dispatch] = useReducer(shoesReducer, shoes);
+    let [Cart, cartDispatch] = useReducer(cartReducer, cart);
     return(
         <context.Provider value={{shoes:shoe, dispatch}}>
-            {children}
+            <cartContext.Provider value={{cart:Cart, cartDispatch}}>
+                {children}
+            </cartContext.Provider>
         </context.Provider>
     )
 }

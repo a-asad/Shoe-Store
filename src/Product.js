@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Grid, Paper, Typography, Button, makeStyles } from '@material-ui/core';
 import { context } from './Context';
 
@@ -17,25 +17,30 @@ const useStyles = makeStyles((theme) => ({
 export const Product = ()=>{
     const {item} = useParams()
     const classes = useStyles();
-    let {shoes} = React.useContext(context);
+    let {shoes, dispatch} = React.useContext(context);
+    function addToCart(itm)
+    {
+        dispatch({type:'remove', item:itm});
+    }
     return(
         <div style={{marginTop:60, padding:20}}>
             <Grid container justify='center' spacing={2}>
                 <Grid item sm={4} md={4} xs={10}>
                     <Paper>
-                        <img src={shoes[item].image} width='100%'/>
+                        <img src={shoes[item].image} alt={item} width='100%'/>
                     </Paper>
                 </Grid>
                 <Grid item sm={4} md={3} xs={10} className={classes.ppr}>
                         <Typography variant='h5' color='secondary'>{item}</Typography>
                         <Typography variant='h6' color='secondary'>Price : ${shoes[item].price}</Typography>
                         <Typography variant='h6' color='secondary' style={{marginBottom:40}}>Remaining : {shoes[item].quantity}</Typography>
-                        <Button className={classes.cartBtn} variant='contained' color='secondary'>Add to Cart</Button>
+                        <Button className={classes.cartBtn} variant='contained' color='secondary' disabled={shoes[item].quantity === 0?true:false}
+                        onClick={()=>{addToCart(item)}}>{shoes[item].quantity === 0?'Out of Stock':'Add to Cart'}</Button>
                 </Grid>
                 <Grid item sm={6} md={7} xs={10} className={classes.ppr}>
                     <Paper elevation={3}>
                         <Typography variant='h5'> Description</Typography>
-                        <Typography variant='h7'> </Typography>
+                        <Typography variant='h6'> </Typography>
                     </Paper>
                 </Grid>
             </Grid>
