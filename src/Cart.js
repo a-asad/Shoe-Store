@@ -48,13 +48,22 @@ export const Cart = ()=>{
         }
         return count;
     }
+    function getTotal()
+    {
+        let total=0;
+        for(let i in cart)
+            total += cart[i].quantity*cart[i].price;
+        return total;
+    }
 
     return(
         <div style={{marginTop:60, padding:20, minHeight:'80vh'}}>
             <Typography align='center' variant='h4' style={{marginBottom:'10vh'}}>Cart</Typography>
             <Grid container justify='center'  spacing={4} alignItems='center'>
                 {itemCount() === 0? 'No items added yet!':
-                Object.entries(cart).map(([shoe,{image,price,quantity}])=>{
+                <>
+                <Grid item sm={10}> <Typography align='center' variant='h5'>Total: ${getTotal()}</Typography></Grid>
+                {Object.entries(cart).map(([shoe,{image,price,quantity}])=>{
                     if(quantity > 0){
                         return(
                             <Grid item sm={10} md={8} xs={11} key={shoe}>
@@ -80,8 +89,8 @@ export const Cart = ()=>{
                             </Grid>
                         )
                     }
-                    return <span></span>
-                })}
+                    return null
+                })}</>}
             </Grid>
         </div>
     )
