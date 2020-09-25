@@ -30,7 +30,7 @@ export const AllProducts = ()=>{
         dispatch({type:'remove', item:itm});
     }
     return(
-        <div style={{marginTop:60, padding:20, minHeight:'80vh'}}>
+        <div style={{minHeight:'80vh'}}>
             <Typography align='center' variant='h4' style={{marginBottom:'10vh'}}>All Products</Typography>
             <Grid container justify='center'  spacing={4} alignItems='center'>
             {Object.entries(shoes).map(([shoe,{image,price,quantity}])=>{

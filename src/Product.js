@@ -25,7 +25,7 @@ export const Product = ()=>{
         dispatch({type:'remove', item:itm});
     }
     return(
-        <div style={{marginTop:60, padding:20}}>
+        <div>
             <Grid container justify='center' spacing={2}>
                 <Grid item sm={4} md={4} xs={10}>
                     <Paper>
@@ -40,9 +40,9 @@ export const Product = ()=>{
                         onClick={()=>{addToCart(item)}}>{shoes[item].quantity === 0?'Out of Stock':'Add to Cart'}</Button>
                 </Grid>
                 <Grid item sm={6} md={7} xs={10} className={classes.ppr}>
-                    <Paper elevation={3}>
-                        <Typography variant='h5'> Description</Typography>
-                        <Typography variant='h6'> </Typography>
+                    <Paper elevation={3} style={{padding:10}}>
+                        <Typography variant='h5'>Description:</Typography>
+                        <Typography variant='h6'>{shoes[item].description}</Typography>
                     </Paper>
                 </Grid>
             </Grid>
